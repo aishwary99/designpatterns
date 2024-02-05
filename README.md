@@ -122,3 +122,48 @@ To adhere to LSP, it's better to have Rectangle and Square as separate classes, 
 
 - This principle says -
     - Write cohesive interfaces.
+
+- Example :
+    - Segregating common behaviour of a persistence service.
+    - Applying individual implementations by overriding persistence service functionalities in UserPersistenceService & OrderPersistenceService.
+    - This way, all the common functionalities are carried out from concrete classes and via the interface, its given as a guideline.
+
+
+#### Dependency Inversion Principle :
+It's based on two rules -
+- High level modules should not depend on low level modules, both should depend on abstractions.
+- Abstractions should not depend upon details, details should depend upon abstractions.
+
+- Dependency :
+```
+public void writeReport() {
+    Report report = new Report();
+
+    // build the report in json format
+    JSONFormatter jsonFormatter = new JSONFormatter();
+    String reportInJSON = jsonFormatter.format(report);
+
+    // write the json string in file
+    FileWriter fileWriter = new FileWriter("report.json");
+    fileWritter.write(reportInJSON);
+}
+```
+In the above example, jsonFormatter & fileWriter are the key dependencies of writeReport().
+
+- Dependency Inversion :
+Instead of instantiating dependencies ourselves, let somebody give us the dependencies and we shall use it in our functionality.
+
+```
+public void writeReport(Formatter formatter, Writer writer) {
+    Report report = new Report();
+
+    // build the report in json format
+    String reportInJSON = formatter.format(report);
+
+    // write the json string in file
+    writer.write(reportInJSON);
+}
+```
+In the above example, the provider can decide upon what formatter & writer to use and our shell function (core logic) will continue to implement the same functionality.
+
+This way we have inverted the dependency to the caller.
