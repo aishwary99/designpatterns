@@ -54,6 +54,15 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 #### Issues :
 - The criteria used by Simple Factory to decide which object to instantitate can get more convoluted / complex over time. If you find yourself in such situation then use factory method design pattern.
 
+#### Factory Method Design Pattern :
+- Used when we want to move object creation logic out , in a separate class.
+- We use this DP, when we don't know in advance which class we may need to instantitate beforehand & also to allow new classes to be added to system and handle their creation without affecting client code.
+- We let subclasses decide which object to instantiate by overriding the factory method.
+
+![github-small](images/factory-method-one.png)
+
+![github-small](images/factory-method-two.png)
+
 ### Structural Design Patterns
 
 ### Behavioural Design Patterns
