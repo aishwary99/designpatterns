@@ -138,6 +138,14 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 - Abstract Factory itself uses factory method pattern.
 - If objects are too expensive to create, then you can transparently switch factory implementations to use prototype design pattern to create objects.
 
+![github-small](images/abstract-factory-three.png)
+
+#### Pitfalls :
+- Complex to implement than factory method.
+- Adding a product requires changes to all the factory implementations.
+- Difficult to visualize the need at start of development and usually starts as factory method.
+- Abstract factory design pattern is very specific to the problem of "product families".
+
 ### Structural Design Patterns
 
 ### Behavioural Design Patterns
