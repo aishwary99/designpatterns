@@ -95,6 +95,44 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 
 ![github-small](images/prototype_second.png)
 
+#### Considerations :
+- Making sure deep copy & shallow copy of references, immutable fields on clones should save the trouble of deep copy.
+- Making sure to reset the state of object before returning its prototype.
+- clone() method is protected in Object class and must be overridden to be public to be callable from child class.
+- Cloneable is a marker interface, an indication that the class supports cloning.
+
+#### Design Considerations :
+- Prototypes are useful when you have large objects where majority of state is unchanged between instances and you can easily identify the state.
+- A prototype registry is a class where you can register various prototypes which other code can access to clone out instances. This solves the issue of getting access to initial instance.
+
+#### Example :
+- Object.clone() itself is an example of Prototype.
+
+#### Comparison with Singleton :
+
+![github-small](images/prototype_third.png)
+
+#### Pitfalls :
+- Deep copy is by default not supported by Object.clone(), you have to implement it.
+- Subclasses may not be able to support clone and so the code becomes complicated as you have to implement wherever it is not supported.
+
+#### Summary :
+- Think of prototype when object construction is costly or not possible.
+- In Java, its typically implemented within clone().
+- Objects which have majority of fields as immutable are good candidates for prototypes.
+- Whenever implementing clone(), pay attention to the choice of shallow & deep copy.
+
+#### Abstract Factory Design Pattern :
+
+![github-small](images/abstract-factory-one.png)
+
+- Abstract Factory makes use of factory method pattern.
+- You can think of AF as an object with multiple factory methods.
+
+![github-small](images/abstract-factory-two.png)
+
+
+
 ### Structural Design Patterns
 
 ### Behavioural Design Patterns
