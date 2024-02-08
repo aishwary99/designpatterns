@@ -63,6 +63,38 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 
 ![github-small](images/factory-method-two.png)
 
+#### Examples :
+- java.util.Collection class has a method - iterator(), which is a factory method.
+- The most defining characteristic of factory method pattern is - "subclasses providing the actual instance".
+
+#### Issues :
+- More complex to implement. More classes involved and need unit testing.
+- Not easy to refactor.
+- Forces to create subclass to create appropriate object instance.
+
+#### Summary :
+- Used when you want to delegate object instantiation to subclasses, you would want to do this when you have "product" heirarchy and possibility of future additions to that.
+- We can end up creating conrete classes based on the new requirements of object instantitation.
+- For each product concrete class, its corresponding creator class will be added.
+    - JSONMessage -> JSONMessageCreator
+    - TextMessage -> TextMessageCreator
+
+
+#### Prototype Design Pattern :
+- We have a complex object that is costly to create.
+- To create more instances of such classes, we can use existing instances as our prototype.
+- Prototype allows us to clone existing objects, and hence saves cost of creating such objects again.
+
+![github-small](images/prototype_one.png)
+
+#### Steps :
+- A class implementing Cloneable interface.
+- Class should override clone() and return copy of itself.
+- The method should declare CloneNotSupportedException.
+- Clone method implementation should consider the deep & shallow copy and choose whichever is applicable.
+
+![github-small](images/prototype_second.png)
+
 ### Structural Design Patterns
 
 ### Behavioural Design Patterns
