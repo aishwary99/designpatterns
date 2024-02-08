@@ -131,7 +131,12 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 
 ![github-small](images/abstract-factory-two.png)
 
-
+#### Implementation Considerations :
+- Factories can be singleton, we typically ever need only one instance of it anyway.
+- Adding a new product type requries changes to the base factory as well as implementation of factory.
+- We provide the client code with concrete factory.
+- Abstract Factory itself uses factory method pattern.
+- If objects are too expensive to create, then you can transparently switch factory implementations to use prototype design pattern to create objects.
 
 ### Structural Design Patterns
 
