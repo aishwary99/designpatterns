@@ -197,6 +197,88 @@ With the Builder pattern, you can create an object piece by piece, specifying on
     * The pooled objects should provide methods to reset its state upon "release" by code.
     * Decision - Whether to create new objects for pool when pool is empty or wait until an object becomes available.
 
+#### Design Considerations :
+- Resetting objects in pool should not be costly otherwise we may end up losing performance of our application.
+- Pre-caching objects could provide add-up benefit.
+- Object pool's synchronization should consider the reset time needed & avoid resetting in synchronized context if possible.
+
+#### Example :
+- java.util.concurrent.ThreadPoolExecutor used for pooling threads. Its often used via ExecutorService interface using methods like newCachedThreadPool().
+
+- Example :: ExecutorService service = Executors.newCachedThreadPool();
+
+- Apache commons dbcp is used for db connection pooling. BasicDataSource in dbcp package uses this DP to pool db connection objects.
+
+#### Comparison with Prototype :
+
+![github-small](images/object-pool-two.png)
+
 ### Structural Design Patterns
+- Structural patterns deals with how objects and classes are composed & arranged.
+
+#### Adapter Design Pattern :
+- We have an existing object which provides functionality that client needs.
+- But client code can't use this object because it expects an object with different interface.
+- Using adapter DP, we make this existing object work with client by adapting the object to client's expected interface.
+- This pattern is also called as wrapper as it wraps the existing objects.
+- Types : [Class Adapter, Object Adapter]
+
+![github-small](images/adapter-one.png)
+
+#### Implementation :
+
+![github-small](images/adapter-two.png)
+
+![github-small](images/adapter-three.png)
+
+#### Scenario :
+- Employee (existing class) -> Customer (used by client code to design business cards).
+- To convert employee to customer, we need an adapter, which uses Employee's information and convert it to Customer.
+
+#### Implementation Considerations :
+- How much work the adapter does, depends upon the differences between target interface & object being adapted.
+- If method arguments & parameters are same, the amount of work done by adapter will also be less.
+- Fixing defects in case of adapters is difficult, so keeping method delegations simple is a way to win.
+
+#### Example :
+- java.io.InputStreamReader & java.io.OutputStreamWriter are examples of object adapters.
+- These classes adapt existing InputStream / OutputStream object to Reader / Writer interfaces.
+
+#### Comparison with Decorator :
+
+![github-small](images/adapter-four.png)
+
+#### Pitfalls :
+- Complexity: Introducing adapters can sometimes add complexity to the codebase, especially if multiple adapters are used to adapt different interfaces.
+
+- Overuse: It's possible to overuse the Adapter pattern, especially in cases where a simpler solution might suffice. This can lead to unnecessary abstraction layers and decreased code readability.
+
+- Performance Overhead: Depending on the implementation, using adapters might introduce a performance overhead, especially if the adaptation process involves heavy transformations or computations.
+
+- Tight Coupling: If not designed carefully, adapters can lead to tight coupling between components, making the codebase less flexible and harder to maintain.
+
+#### Difference between Class Adapter & Object Adapter :
+
+* Object Adapter:
+
+Composition: In the Object Adapter pattern, the adapter contains an instance of the adaptee class. It uses this instance to perform the necessary adaptation.
+
+Flexibility: Object Adapter is more flexible than the Class Adapter because it allows adapting subclasses of the adaptee and multiple adaptee classes through polymorphism.
+
+Ease of Use: It's easier to implement Object Adapter as it doesn't rely on multiple inheritance or interface implementation, making it suitable for languages like Java that do not support multiple inheritance.
+
+Example: In Java, you might have an interface Target that your client expects to use. The Adapter class would implement this Target interface and contain an instance of the Adaptee class. It delegates the requests from the client to the Adaptee instance, adapting them as necessary.
+
+* Class Adapter:
+
+Inheritance: In the Class Adapter pattern, the adapter inherits from both the target interface and the adaptee class.
+
+Multiple Inheritance: Class Adapter relies on multiple inheritance, which is not supported in languages like Java (though it can be emulated with interfaces and delegation).
+
+Limitations: Due to the use of multiple inheritance or interfaces with delegation, the Class Adapter might be less flexible and more complex than the Object Adapter.
+
+Example: In Java, the Adapter class would extend the Adaptee class and implement the Target interface. It overrides or extends methods from the Adaptee class to adapt them to the interface expected by the client.
+
+
 
 ### Behavioural Design Patterns
