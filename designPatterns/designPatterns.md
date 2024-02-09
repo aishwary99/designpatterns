@@ -146,6 +146,57 @@ With the Builder pattern, you can create an object piece by piece, specifying on
 - Difficult to visualize the need at start of development and usually starts as factory method.
 - Abstract factory design pattern is very specific to the problem of "product families".
 
+#### Singleton Design Pattern :
+- A class that has only one instance, accessible globally through a single point.
+- Main problem this DP solves is to ensure only a single instance of class exist.
+- Any state you add in singleton becomes part of "global state" of your application.
+- Singleton pattern is used for logging, drivers objects, caching, and thread pool.
+- Singleton design pattern is also used in other design patterns like Abstract Factory, Builder, Prototype, Facade, etc.
+
+#### Types of Singleton :
+* Eager Initialization
+* Lazy Initialization
+* Static Block Initialization
+* Thread Safe Singleton
+* Bill Pugh Singleton
+* Using Reflection to destroy Singleton
+* Enum Singleton
+* Serialization & Singleton
+
+#### Example :
+- Singleton design pattern is used in core Java classes also (for example, java.lang.Runtime, java.awt.Desktop).
+
+#### Considerations :
+- Always go for eager/lazy singleton approaches, as its the best and preferred way.
+- The "classic" singleton pattern uses double check locking and volatile field.
+- Singleton creation doesn't need any parameters. If you find yourself in need of support for constructor arguments, you simply need a factory method or simple factory design pattern.
+
+#### Comparison with Factory Method Pattern :
+
+![github-small](images/singleton-one.png)
+
+#### Pitfalls :
+- Singletons can be difficult to extend or modify later on, especially if they are used extensively throughout your codebase. Changing the behavior of a singleton often requires modifying its implementation directly, which can lead to ripple effects throughout your code.
+
+- Since singletons often rely on static methods or global accessors to retrieve the instance, it can be difficult to mock or stub the singleton instance during testing. This can make unit testing more challenging and can lead to tests that are tightly coupled to the singleton implementation.
+
+- Using singletons can hide dependencies between different components of your application. This can make it harder to understand the relationships between different parts of your code and can lead to tightly coupled and difficult to maintain code.
+
+#### Object Pool Design Pattern :
+- If cost of creating an instance is very high and we need a large number of such objects of this class for short duration, then we can use object pool.
+- Here, either we pre-create objects of the class or collect unused instances in an in-memory cache.
+- It is one of the most complicated patterns to implement efficiently.
+
+![github-small](images/object-pool-one.png)
+
+#### Implementation :
+- A class shall be created with following considerations :
+    * A thread safe caching of objects should be done in pool.
+    * Methods to release & acquire of objects should be provided.
+    * Pool should reset cached objects before giving them out.
+    * The pooled objects should provide methods to reset its state upon "release" by code.
+    * Decision - Whether to create new objects for pool when pool is empty or wait until an object becomes available.
+
 ### Structural Design Patterns
 
 ### Behavioural Design Patterns
