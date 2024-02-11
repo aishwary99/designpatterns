@@ -279,6 +279,44 @@ Limitations: Due to the use of multiple inheritance or interfaces with delegatio
 
 Example: In Java, the Adapter class would extend the Adaptee class and implement the Target interface. It overrides or extends methods from the Adaptee class to adapt them to the interface expected by the client.
 
+#### Bridge Design Pattern :
+- Our implementation class & its abstraction are generally coupled to each other in normal inheritance.
+- Using bridge pattern, we decouple them so they can change without affecting each other.
+- We achieve this by creating two separate inheritance heirarchies, one for implementation and another for abstraction.
+- We use composition to bridge these heirarchies.
 
+#### Implementation :
+- Determine common operations and define them in abstraction.
+- Define our implementor, implementor methods do not have to match with abstractor methods.
+- Then we write one or more implementors providing implementations.
+- Abstraction can carry out its work by using implementor methods.
+
+- Note : Abstractions are created by composing them with an instance of concrete implementor (used by methods in abstractor).
+
+#### UML :
+
+![github-small](images/bridge-one.png)
+
+#### Implementation Considerations :
+- In case, we are gonna have single implementor (for example : SinglyLinkedList), then we can skip creating abstract implementor.
+- Abstractor gives decouple feeling, as it do not know which implementor client is referring.
+
+#### Design Considerations :
+- Bridge design pattern gives great flexibility to change abstraction & implementation separately, you can package & build them separately to modularize overall system.
+- We can also make use of abstract factory design pattern to create abstraction objects with correct implementation, you can decouple concrete implementors from abstraction.
+
+#### Example :
+- java.sql.DriverManager class with java.sql.Driver interface forms a bridge pattern.
+- The actual implementation for Driver class defers to the use of databases (Driver, OracleDriver).
+- Collections.newSetFromMap() method returns a set which is backed from a given map.
+
+#### Comparison with Bridge Design Pattern :
+
+![github-small](images/bridge-two.png)
+
+#### Pitfalls :
+- Fairly complex to understand.
+- Need to have a well thought & fairly comprehensive design in front of you before you can decide on bridge pattern.
+- Needs to be designed upfront, adding bridge to the legacy code is difficult. Even for ongoing project, adding bridge later in time may require fair amount of rework.
 
 ### Behavioural Design Patterns
