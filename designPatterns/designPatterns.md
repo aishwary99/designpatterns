@@ -319,4 +319,35 @@ Example: In Java, the Adapter class would extend the Adaptee class and implement
 - Need to have a well thought & fairly comprehensive design in front of you before you can decide on bridge pattern.
 - Needs to be designed upfront, adding bridge to the legacy code is difficult. Even for ongoing project, adding bridge later in time may require fair amount of rework.
 
+#### Decorator Design Pattern :
+- When we want to enhance behaviour of our existing object dynamically, then we use decorator design pattern.
+- Decorator wraps an object within itself, provides the same interface as wrapped object, so the client code of original object does not need to change.
+- An alternative to subclassing, making existing classes extend their functionalities.
+
+#### Implementation Steps :
+- Start with Component (any interface).
+- Component defines interface that is already being used by Client.
+- We define our Decorator. Decorator implements Component & also needs reference to Concrete Component.
+- In Decorator methods, we provide additional behaviour on top of that provided by Concrete Component interface.
+- Decorator can be abstract as well, depending on subclasses to provide functionality.
+
+#### UML :
+
+![github-small](images/decorator-one.png)
+
+#### Implementation & Design Considerations :
+- Pay attention to hashCode() and equals() as you have to decide if object is equal to same instance with decorator.
+- Decorators support recursive composition, and so this pattern leads to creation of lots of small objects that leads "small functionalities". This becomes difficult to debug after certain extent.
+- Decorators are more flexible and powerful than inheritance. Inheritance are static by definition but decorators allows you to dynamically compose behaviours at runtime.
+- Decorators should act like additional skin to your object, They should add helpful small behaviours to object's original behaviour. Do not change meaning of operations.
+
+#### Example :
+- java.io package is great example of decorator pattern.
+- BufferedOutputStream decorates java.io.OutputStream object. 
+- To the existing OutputStream object, BufferedOutputStream object adds additional buffering capability to file writing operation, thus improving the disk i/o performance by reducing the number of writes.
+
+#### Comparison with Composite :
+
+![github-small](images/decorator-two.png)
+
 ### Behavioural Design Patterns
