@@ -350,4 +350,87 @@ Example: In Java, the Adapter class would extend the Adaptee class and implement
 
 ![github-small](images/decorator-two.png)
 
+#### Composite Design Pattern :
+- Imagine you have a tree structure, where each node in the tree can be either a leaf or a branch.
+- Leaf nodes are the smallest elements in the tree. They don't have any children and represent the basic building blocks.
+- Branch nodes are composed of one or more child nodes, which can be either leaf nodes or other branch nodes. They represent the structural elements that organize and group the leaf nodes.
+- The Composite design pattern is like a way to treat individual objects and compositions of objects (branches) uniformly.
+
+It lets clients treat individual objects and compositions of objects uniformly.
+So, whether you have a single leaf node or a whole branch of nested nodes, you can interact with them in the same way.
+Here’s a simple analogy:
+
+Think of building blocks like LEGO. Each LEGO piece can be considered a leaf node. It's a standalone piece. But you can also combine several LEGO pieces together to create more complex structures like houses, cars, or even entire cities. These complex structures are like branch nodes.
+
+With the Composite pattern, you can interact with both individual LEGO pieces and complex structures in the same way. You can connect them, detach them, or even iterate over them without needing to know if you're dealing with a single piece or a structure made of many pieces.
+
+In summary, the Composite pattern helps you to work with individual objects and compositions of objects in a uniform manner, simplifying the code and making it more flexible.
+
+#### Implementation Steps :
+- Create an abstract class / interface for Component.
+- Component must declare all methods that are applicable to both leaf and composite.
+- We have to choose who defines the children management operations, component or composite.
+- Then we finally implement the Composite. An operation invoked on Composite is propagated to all its children.
+- In leaf nodes, we have to handle the non-applicable operations like add/remove a child if they are defined in Component.
+- File -> Directory, Directory is a Composite class.
+
+#### UML :
+
+![github-small](images/composite-one.png)
+
+#### Implementation & Design Considerations :
+- You can provide a method to access parent of a node. This will simplify traversal of the entire tree.
+- Defining the collection field of children in base component instead of composite.
+- If we have a node that is immutable and is repeating 100 of times, we can cache them and save memory.
+- Decision needs to be done about where to define children management operations. Defining them on component provides transparency but leaf nodes are forced to implement those methods. Defining them on composite is safer but client needs to be made aware of composite.
+- Overall goal of design should be make client code easier to implement when using composite.
+
+#### Examples :
+
+![github-small](images/composite-two.png)
+
+#### Comparison with Decorator :
+
+![github-small](images/composite-three.png)
+
+#### Pitfalls :
+- Difficult to restrict what is added to heirarchy.
+- If multiple types of leaf nodes are present in the system, then client code ends up doing runtime checks to ensure the operation is available on a node.
+- Creating the original heirarchy can still be complex implementation especially if you are using caching to reuse nodes and number of nodes are still high.
+
+#### Facade Design Pattern :
+- Client has to interact with large number of interfaces & subclasses inorder to get the result. So in that case, client gets tightly coupled with those interfaces & classes. Facade solves this problem.
+- Think of facade as a system that interacts with further subsystems to satisfy client requests.
+
+![github-small](images/facade-one.png)
+
+#### Implementation :
+- Start by creating a class that will serve as a Facade.
+- We determine the overall use-case/tasks that the subsystems is used for.
+- We write a method that exposes each use case or task.
+- This method takes care of working with different classes of subsystem.
+
+#### UML :
+
+![github-small](images/facade-two.png)
+
+#### Implementation & Design Considerations :
+- A facade should minimize the complexity of subsystem and provide usable interface.
+- You can have an interface or abstract class for facade and client can use different subclasses to talk to different subsystem implementations.
+
+- Facade is a great solution to simplify dependencies. It allows you to have a weak coupling between subsystems.
+- If your concern is coupling of client code to subsystems specific classes and not worried about simplification provided by a facade, then you can use abstract factory pattern in place of facade.
+
+#### Example :
+- java.net.URL is a facade class. This class provides a method called openStream() and we get an input stream to the resource pointed by the URL object.
+- This way all the complexities of dealing with multiple classes from the java.net package as well as some internal sun packages is abstracted out.
+
+#### Comparison with Adapter :
+
+![github-small](images/facade-three.png)
+
+#### Pitfalls :
+- It is often overused or misused, it can hide improperly designed API's.
+- A common misuse is to use them as "container of related methods".
+
 ### Behavioural Design Patterns
