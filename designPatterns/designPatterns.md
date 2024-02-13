@@ -433,4 +433,63 @@ In summary, the Composite pattern helps you to work with individual objects and 
 - It is often overused or misused, it can hide improperly designed API's.
 - A common misuse is to use them as "container of related methods".
 
+#### Flyweight :
+- Our system needs a large number of objects of particular class & maintaining these instances is a performance concern.
+- Flyweight allows us to share an object in multiple contexts. But instead of sharing entire object (not feasible), we divide an object's state in two parts : intrinsic & extrinsic. Intrinsic state is a state that is shared in every context while extrinsic state is a state which is context specific.
+- We create object with only intrinsic state and share it in various contexts.
+- Client provides the extrinsic state to object to carry out its functionality.
+
+- Flyweight design pattern is a Structural design pattern like Facade pattern, Adapter Pattern and Decorator pattern. Flyweight design pattern is used when we need to create a lot of Objects of a class. Since every object consumes memory space that can be crucial for low memory devices, such as mobile devices or embedded systems, flyweight design pattern can be applied to reduce the load on memory by sharing objects. Before we apply flyweight design pattern, we need to consider following factors:
+
+The number of Objects to be created by application should be huge.
+The object creation is heavy on memory and it can be time consuming too.
+The object properties can be divided into intrinsic and extrinsic properties, extrinsic properties of an Object should be defined by the client program.
+To apply flyweight pattern, we need to divide Object property into intrinsic and extrinsic properties. Intrinsic properties make the Object unique whereas extrinsic properties are set by client code and used to perform different operations. For example, an Object Circle can have extrinsic properties such as color and width. For applying flyweight pattern, we need to create a Flyweight factory that returns the shared objects. For our example, lets say we need to create a drawing with lines and Ovals. So we will have an interface Shape and its concrete implementations as Line and Oval. Oval class will have intrinsic property to determine whether to fill the Oval with given color or not whereas Line will not have any intrinsic property.
+
+#### Implementation :
+- Start by identifying "intrinsic" & "extrinsic" state of our object.
+- We create an interface for flyweight to provide common methods that accept exitrinsic state.
+- In implementation of shared flyweight we add intrinsic state & also implement methods.
+- In unshared implementation of flyweight we simply ignore the extrinsic state argument as we have all state within object.
+- Next, we implement the flyweight factory which caches flyweights & also provides methods to get them.
+- In our client code, we either maintain that extrinsic state or calculate it on the fly using flyweight.
+
+#### UML :
+
+![github-small](images/flyweight-one.png)
+
+#### Implementation & Design Considerations :
+- Factory is always necessary as client code needs easy way to get hold of shared flyweight.
+- Also number of shared instances can be large so central place is good strategy to keep track of all of them.
+- Flyweight's intrinsic state should be immutable in order to successfully implement flyweight.
+
+- Usability of flyweight is entirely dependent upon presence of sensible extrinsic state in object which can be moved out of object without any issue.
+- Some design patterns like state & strategy can make best use of flyweight pattern.
+
+#### Example :
+- java.lang.Integer, Short, Byte etc. Here the valueOf static method serves as factory method.
+- Internally they cache some objects and returns them when needed.
+- StringPool is another example of flyweight design pattern. 
+
+```
+public static Integer valueOf(int i) {
+    if (i >= IntegerCache.low && i <= IntegerCache.high) {
+        return IntegerCache.cache[i + (-IntegerCache.low)];
+    }
+    return new Integer(i);
+}
+
+```
+
+#### Comparison with Object Pool :
+
+![github-small](images/flyweight-two.png)
+
+#### Pitfalls :
+- Runtime cost must be added for maintaining extrinsic state. Client code has to either maintain it or compute it every time it needs to use flyweight.
+- It is often difficult to find perfect candidate objects for flyweight. GUI applications heavily benefit from this pattern.
+
+#### Proxy Design Pattern :
+
+
 ### Behavioural Design Patterns
