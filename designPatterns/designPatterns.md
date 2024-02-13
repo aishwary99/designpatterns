@@ -490,6 +490,46 @@ public static Integer valueOf(int i) {
 - It is often difficult to find perfect candidate objects for flyweight. GUI applications heavily benefit from this pattern.
 
 #### Proxy Design Pattern :
+- "Proxy" means in-place of.
+- It is used when you want to provide a placeholder or surrogate to another object.
+- Proxy acts on behalf of original object due to following reasons -
+    * Protection Proxy - controla access to original object's operations.
+    * Remote Proxy - Provides a local representation of remote object.
+    * Virtual Proxy - Delays construction of original object until absolutely necessary.
+- Client is unaware of proxy. Proxy performs its work transparently.
 
+#### Implementation Steps :
+- Proxy must implement same interface as real subject.
+- We can either create actual object later when required or ask for one in constructor.
+- In method implementation of proxy, we implement proxy's functionality before delegating to real object.
+- Our application needs to decide, exactly when & where to provide proxy instance to client.
+
+#### UML :
+
+![github-small](images/proxy-one.png)
+
+Note : Visit the dynamic proxy example again.
+
+#### Implementation & Design Considerations :
+- For creation of on-demand types of proxies, actual object is created only when proxy can't handle the requests.
+- Authentication proxies use pre-built objects so they are provided with object during construction of proxy.
+- Proxy itself can maintain/cache some state on behalf of real object in creation on demand use cases.
+- Pay attention to performance cost of proxies as well synchronization issues added by proxy itself.
+
+- Also, proxies typcially do not need to know about the actual concrete implementation of real object.
+- With java, you can create dynamic proxies allowing you to create proxies for any object at runtime.
+- Proxies can be great for implementing security or as stand-ins for real objects which may be a costly object that you want to defer loading.
+
+#### Example :
+- Lazy loading in hibernate is done using proxy design pattern. If you have any relationship in entity class mapped as collection, and that candidate is marked as lazy loading then hibernate will provide a virtual proxy in place.
+- Spring uses proxy pattern to provide support for features like transcations, caching and general AOP support.
+
+#### Comparison with Decorator :
+
+![github-small](images/proxy-two.png)
+
+#### Pitfalls :
+- If you need proxies for handling multiple responsibilities like auditing, authentication, as a stand-in for the same instance, then its better to have a single proxy to handle all these requirements. Due to the way some proxies create objects on their own, it becomes quite difficult to manage them.
+- Static proxies look quite similar to other patterns like decorator & adapter patterns. It can be confusing to figure out from code alone for someone not familiar with all these patterns.
 
 ### Behavioural Design Patterns
