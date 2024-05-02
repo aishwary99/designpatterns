@@ -532,4 +532,44 @@ Note : Visit the dynamic proxy example again.
 - If you need proxies for handling multiple responsibilities like auditing, authentication, as a stand-in for the same instance, then its better to have a single proxy to handle all these requirements. Due to the way some proxies create objects on their own, it becomes quite difficult to manage them.
 - Static proxies look quite similar to other patterns like decorator & adapter patterns. It can be confusing to figure out from code alone for someone not familiar with all these patterns.
 
-### Behavioural Design Patterns
+### Behavioural Design Patterns :
+- It describes how classes and objects interact & communicate with each other.
+
+#### Chain Of Responsibility Design Pattern :
+- We need to avoid coupling the code, which sends the request & which handles the request.
+- Typically the code which wants to get the request handled, calls the exact method of an object (the code which will be handling it) to process it, thus tight coupling.
+- COR solves this problem by giving more than object, chance to handle it.
+- We create objects which are chained together by one object knowing reference of object which is next in chain. We give request to first object in the chain, if it can't handle it, then simply it passes the request down the chain.
+
+ObjectOne -> ObjectTwo -> ObjectThree -> ObjectFour....
+
+#### Implementation :
+- Define a handler (it could be an abstract class / interface) -
+    - A method to accept incoming request.
+    - A method to access successor in the chain. If it's abstract class then we can maintain successor.
+- Next, we define one or more concrete handlers (implementations). This implementation checks if it can handle the request. If not, then it should pass request to next handler.
+
+#### Example :
+
+UML One -
+
+![github-small](images/cor-one.png)
+
+UML Two -
+
+![github-small](images/cor-two.png)
+
+- COR's best example is servlet filters. Each filter gets a chance to handle incoming request and passes it down in the chain once its done.
+- Servlet Filters come from - javax.servlet.Filter interface which defines following method -
+    - public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    - Implementations will use FilterChain object to pass request to next handler in the chain.
+
+#### Comparison with Command DP :
+
+![github-small](images/cor-three.png)
+
+#### Pitfalls :
+- There is no gurantee that the request passing on will be handled.
+- Misconfigured can lead to unwanted connections in the chain in wrong ordering.
+
+
