@@ -603,6 +603,29 @@ UML Two -
 #### Example : 
 - Runnable interface (java.lang.Runnable) and Swing Action (javax.swing.Action) uses command pattern.
 
+#### Mediator Design Pattern :
+- Mediator encapsulates -> how a set of objects interact with each other.
+    - ObjectOne -> MediatorObject -> ObjectTwo
+- Due to this encapsulation, there is a loose coupling between the interacting objects.
+- Typically, an object explicitly knows about other object to which it wants to interact.
+- In this pattern, the interaction within the mediator object & interacting objects only know about the mediator object.
+- Benefit -> The interaction can now change without needing to notify participating objects.
 
+#### Implementation :
+- Creating a chat application where user's can do group chat.
+- Every user will be identified by its name and they can send/receive messages.
+- The message send by any user will be received by all the user's in the chat.
 
+![github-small](images/mediator-one.png)
 
+#### Example :
+
+- java.util.Timer class scheduleXXX() methods
+- Java Concurrency Executor execute() method.
+- java.lang.reflect.Method invoke() method.
+
+#### Points to remember :
+
+- Mediator pattern is useful when the communication logic between objects is complex, we can have a central point of communication that takes care of communication logic.
+- Java Message Service (JMS) uses Mediator pattern along with Observer pattern to allow applications to subscribe and publish data to other applications.
+- We should not use mediator pattern just to achieve lose-coupling because if the number of mediators will grow, then it will become hard to maintain them.
