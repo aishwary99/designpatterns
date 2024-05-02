@@ -572,4 +572,37 @@ UML Two -
 - There is no gurantee that the request passing on will be handled.
 - Misconfigured can lead to unwanted connections in the chain in wrong ordering.
 
+#### Command Design Pattern :
+- We want to represent a request or a method call as an object.
+- Information about parameters being passed and the operation is encapsulated in an object called command.
+- Advantage of command dp is, what would have been a method call is now an object which can be stored for later execution or can be sent to other parts of a code.
+- We can now queue our command objects and execute them later.
+- It's used to implement loose-coupling in a request-response model.
+
+#### Implementation :
+- We will design FileSystemUtility example.
+- In this example - FileSystemReceiver will be an interface -
+    - openFile
+    - writeFile
+    - closeFile
+- FileSystemUtility will be implemented for different O.S's.
+
+![github-small](images/command-one.png)
+
+#### Points to remember :
+
+- Command is the core of command design pattern that defines the contract for implementation.
+- Receiver implementation is separate from command implementation.
+- Command implementation classes chose the method to invoke on receiver object, for every method in receiver there will be a command implementation. It works as a bridge between receiver and action methods.
+- Invoker class just forward the request from client to the command object.
+- Client is responsible to instantiate appropriate command and receiver implementation and then associate them together.
+- Client is also responsible for instantiating invoker object and associating command object with it and execute the action method.
+- Command design pattern is easily extendible, we can add new action methods in receivers and create new Command implementations without changing the client code.
+- The drawback with Command design pattern is that the code gets huge and confusing with high number of action methods and because of so many associations.
+
+#### Example : 
+- Runnable interface (java.lang.Runnable) and Swing Action (javax.swing.Action) uses command pattern.
+
+
+
 
