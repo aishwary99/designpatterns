@@ -629,3 +629,65 @@ UML Two -
 - Mediator pattern is useful when the communication logic between objects is complex, we can have a central point of communication that takes care of communication logic.
 - Java Message Service (JMS) uses Mediator pattern along with Observer pattern to allow applications to subscribe and publish data to other applications.
 - We should not use mediator pattern just to achieve lose-coupling because if the number of mediators will grow, then it will become hard to maintain them.
+
+
+#### Iterator Design Pattern :
+- Iterator allows a way to access elements of an object in sequence while hiding the actual internal data structure used.
+- In Java, iterators are integral part of collections framework and they are implementations of this design pattern.
+- Iterators are stateful, meaning it remembers its position while iterating.
+
+
+#### Example :
+- Let's implement a simple example of Channel Iterator.
+- Channel -> frequency, ChannelType (enum).
+- Interface ChannelCollection -> 
+    - addChannel(Channel channel)
+    - removeChannel(Channel channel)
+    - ChannelIterator iterator(ChannelType channelType) // gives an iterator
+        - its a private inner class, implements iterator design pattern.
+
+- java.util.Scanner class implements Iterator interface.
+
+#### Important Points :
+- Iterator pattern is useful when you want to provide a standard way to iterate over a collection and hide the implementation logic from client program.
+- The logic for iteration is embedded in the collection itself and it helps client program to iterate over them easily.
+
+#### Pitfalls : 
+- Access to index during iteration is not readily available like we have in for-loop.
+- Making modifications to the collection while someone is using an iterator often makes that iterator instance invalid as its state may not be valid.
+
+
+#### Observer Design Pattern :
+- Using observer design pattern, we can notify multiple objects whenever an object changes its state.
+- This design pattern is also called as a Published-Subscriber or pub-sub pattern.
+- We define one-to-many relationship between objects, where many objects are listening for state change of a single object, without tight coupling all of them together.
+- This pattern is often implemented where listener only gets notification that "something" has changed in the object's state. Listeners query back to find out more information if needed.
+
+#### Real life example :
+- Message queues like - JMS uses this design pattern along with Mediator Pattern to allow applications to subscribe and publish data to other applications.
+- MVC frameworks also use observer design pattern where model is the subject and views are observers that can register to get notified of any change of the model.
+
+#### Implementation :
+- Subject ->
+    - register(Observer observer)
+    - unregister(Observer observer)
+    - notify()
+    - Object getUpdate(Observer observer)
+- Observer (interface) ->
+    - update()
+    - setSubject(Subject subject)
+- SomeSubject implements Subject
+    - List<Observer> observers
+    - String message
+    - boolean changed
+    - final Object MUTEX // for thread safety
+- SomeObserver implements Observer
+    - String name
+    - Subject topic
+
+![github-small](images/observer-one.png)
+
+#### Real life example :
+- java.util.EventListener in Swing
+- javax.servlet.http.HttpSessionBindingListener
+- javax.servlet.http.HttpSessionAttributeListener
