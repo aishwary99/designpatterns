@@ -691,3 +691,27 @@ UML Two -
 - java.util.EventListener in Swing
 - javax.servlet.http.HttpSessionBindingListener
 - javax.servlet.http.HttpSessionAttributeListener
+
+
+#### Strategy Design Pattern : 
+- Strategy pattern allows us to encapsulate an algorithm in a class.
+- We can configure our context with an object of this class, to change the algorithm used to perform given operation.
+- This is helpful if you have many possible variations of an algorithm.
+- A good applicability of strategy design pattern is if we find different algorithms / behaviours in our methods which are selected with conditional statements like if-else or switch-case.
+- Strategy classes are usually implemented in an inheritance heirarchy so that we can choose any one implementation and it will work on our main object / context as the interface is same for all implementations.
+
+![github-small](images/strategy-one.png)
+
+#### Important Points :
+- Strategy Pattern is very similar to State Pattern. One of the difference is that Context contains state as instance variable and there can be multiple tasks whose implementation can be dependent on the state whereas in strategy pattern strategy is passed as argument to the method and context object doesn’t have any variable to store it.
+- Strategy pattern is useful when we have multiple algorithms for specific task and we want our application to be flexible to chose any of the algorithm at runtime for specific task.
+
+#### Real life example :
+- java.util.Comparator is an interface.
+- For comparing different objects based on some criteria, one can define - AgeComparator, NameComparator and so on.
+- Depending on the comparator being passed to Collections.sort(), the object (Person) can be sorted.
+- Different algorithms context are applied at runtime.
+
+
+#### Note : 
+- See - State, Null Object & Visitor pattern.
